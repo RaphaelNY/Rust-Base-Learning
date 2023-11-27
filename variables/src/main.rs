@@ -5,7 +5,7 @@ fn main() {
      */
     println!("the value of x is {}", x);
 
-    let mut x = "sc";
+    let x = "sc";
     println!("the new x is {}", x);
      // shadowing
     let x = "sdsc";
