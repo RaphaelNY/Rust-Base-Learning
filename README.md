@@ -7,3 +7,7 @@
 > my Start of langurage Rust
 
 ## Cargo learning base demo: hello_cargo
+
+## GeussNum demo: a guessing number game
+
+## compound: class try of 3.2,3.3
