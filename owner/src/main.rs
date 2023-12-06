@@ -90,6 +90,21 @@ fn main() {
     let s1 :String = gives_ownership();
     let s2 :String = String::from("hello");
     let s3 = takes_and_gives_back(s2); // s2 move to s3, and you can't used s2 again
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+     // reference
+    let s1 = String::from("😎");
+    let len :usize = calculate_length(&s1);
+
+    println!("the length of {} is {}", s1, len);
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+     // a interesting code
+    let mut s = String::from("hello");
+    {
+        let s1 = &s;
+    } // when arrived here,s1 leaved his scape,and dropped by system
+    let s2 = &mut s;
+     // eig. mut reference and un mut reference cannot be had in same time,more than one un mut ref was allowed.
 }
 
 fn takes_ownership(some_string: String) { // some_string come into scope
@@ -108,3 +123,8 @@ fn gives_ownership() -> String{
 fn takes_and_gives_back(a_string: String) -> String {
     a_string
 }
+
+fn calculate_length(s: &String) -> usize{
+     // s.push_str("world");
+    s.len()
+} // error: s.push_str("world"); s is a &,so the data it refers to refers to cannot be borrowed an mutable
