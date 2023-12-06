@@ -6,6 +6,8 @@
                                // can do something to s
     } // s's scope end
 */
+use std::mem::take;
+
 fn main() {
     let s  = String::from("hello");
     let mut s:String = "hello".parse().unwrap();
@@ -83,6 +85,11 @@ fn main() {
     makes_copy(x);
     println!("s is {}",s); // error, because s has lost efficacy
     println!("x is {}",x); // right, because x is i32, which has achieved Copy trait
+
+     // return value and scope
+    let s1 :String = gives_ownership();
+    let s2 :String = String::from("hello");
+    let s3 = takes_and_gives_back(s2); // s2 move to s3, and you can't used s2 again
 }
 
 fn takes_ownership(some_string: String) { // some_string come into scope
@@ -91,4 +98,13 @@ fn takes_ownership(some_string: String) { // some_string come into scope
 
 fn makes_copy(some_integer: i32) { // some_integer comes into scope
     println!("{}", some_integer);
+}
+
+fn gives_ownership() -> String{
+    let some_thing = String::from("hello");
+    some_thing
+}
+
+fn takes_and_gives_back(a_string: String) -> String {
+    a_string
 }
