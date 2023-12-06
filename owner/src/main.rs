@@ -1,11 +1,10 @@
-// every x has a scope
-// example
-/*
-fn main() {
-     // s unavailable
-    let s :&str = "hello"; // s available
-                           // can do something to s
-} // s's scope end
+/* every x has a scope
+   example
+    fn main() {
+         // s unavailable
+        let s :&str = "hello"; // s available
+                               // can do something to s
+    } // s's scope end
 */
 fn main() {
     let s  = String::from("hello");
@@ -26,6 +25,7 @@ fn main() {
     let y = x; // because i32 in a known value, this two 5 was pushed to stack
     let s1 = String::from("hello");
     let s2 = s1; // this has a different exchange way to last one
+    println!("{} {}",y,s2);
      /*
         String has three part: a pointer
                              : length(how many Bs of save the thing in String needed is)
@@ -52,10 +52,43 @@ fn main() {
 
     println!("example about clone: ");
     println!("s1 = {}, s2 = {}", s1, s2);
-     // but some varies only in stack, needn't be clone,of all these,shallow or deep seems the same
-     // can copy eig. i32, bool, char, f64, u32, etc.
-     // eig. if something or a part of it has achieved Copy trait, rust wouldn't allowed to achieve copy trait again
-     // can't copy eig. String, Vec<T>, etc.
-     // if all varies in a tuple is can be copy, the tuple can be copy
+    drop(s1);
+    drop(s2);
+     /* but some varies only in stack, needn't be clone,of all these,shallow or deep seems the same
+        can copy eig. i32, bool, char, f64, u32, etc.
+        eig. if something or a part of it has achieved Copy trait, rust wouldn't allowed to achieve copy trait again
+        can't copy eig. String, Vec<T>, etc.
+        if all varies in a tuple is can be copy, the tuple can be copy
+     */
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+     // own power and function
+     /*
+        when a function was called, all of its parameters will be moved or copied
+        eig. fn main() {
+                let s = String::from("hello");
+                takes_ownership(s);
+                let x = 5;
+                makes_copy(x);
+            }
+            fn takes_ownership(some_string: String) { // some_string come into scope
+                println!("{}", some_string);
+            } // some_string goes out of scope and `drop` is called. The backing memory is freed.
+            fn makes_copy(some_integer: i32) { // some_integer comes into scope
+                println!("{}", some_integer);
+            } // some_integer goes out of scope. Nothing special happens.
+     */
+    let s = String::from("hello");
+    takes_ownership(s.clone()); // takes_ownership(s); error, s has lost efficacy
+    let x = 5;
+    makes_copy(x);
+    println!("s is {}",s); // error, because s has lost efficacy
+    println!("x is {}",x); // right, because x is i32, which has achieved Copy trait
+}
 
+fn takes_ownership(some_string: String) { // some_string come into scope
+    println!("{}", some_string);
+} // some_string goes out of scope and `drop` is called. The backing memory is freed.
+
+fn makes_copy(some_integer: i32) { // some_integer comes into scope
+    println!("{}", some_integer);
 }
