@@ -38,4 +38,24 @@ fn main() {
         when s1 and s2 leaved scope,they will try to release the same memory, which will cause **the double free bug**.
         to avoid this question,rust will make s1 lose efficacy,then when s1leaved scope, rust needn't free any memory.
      */
+
+     // move || Clone
+     /* shallow copy and deep copy
+        shallow copy: copy the pointer, len, capacity
+        deep copy: copy the pointer, len, capacity, and the thing in pointer point path
+        rust use move to shallow copy
+        if we want to deep copy, we can use clone
+        eig. you can used clone to copy a String,which can copied data in heap
+     */
+    let s1 = String::from("hello");
+    let s2 = s1.clone();
+
+    println!("example about clone: ");
+    println!("s1 = {}, s2 = {}", s1, s2);
+     // but some varies only in stack, needn't be clone,of all these,shallow or deep seems the same
+     // can copy eig. i32, bool, char, f64, u32, etc.
+     // eig. if something or a part of it has achieved Copy trait, rust wouldn't allowed to achieve copy trait again
+     // can't copy eig. String, Vec<T>, etc.
+     // if all varies in a tuple is can be copy, the tuple can be copy
+
 }
