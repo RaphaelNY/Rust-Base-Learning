@@ -105,6 +105,12 @@ fn main() {
     } // when arrived here,s1 leaved his scape,and dropped by system
     let s2 = &mut s;
      // eig. mut reference and un mut reference cannot be had in same time,more than one un mut ref was allowed.
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+     // slice
+    let mut s = String::from("hello world!");
+    let wordindex = first_world(&s);
+
+    println!("{}!", wordindex);
 }
 
 fn takes_ownership(some_string: String) { // some_string come into scope
@@ -128,3 +134,14 @@ fn calculate_length(s: &String) -> usize{
      // s.push_str("world");
     s.len()
 } // error: s.push_str("world"); s is a &,so the data it refers to refers to cannot be borrowed an mutable
+
+fn first_world(s: &String) -> usize {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate(){
+        if item == b' ' {
+            return i;
+        }
+    }
+    s.len()
+}
