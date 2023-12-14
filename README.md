@@ -10,4 +10,14 @@
 
 ## GeussNum demo: a guessing number game
 
-## compound: class try of 3.2,3.3
+## compound: class try of 3.2 && 3.3
+
+## function_try: class try of 3.4
+
+## controling: class try of 3.5 && 3.6
+
+## owner: class try of 4.1 && 4.2 && 4.3
+
+## struct_trying: class try of 5.1
+
+## struct_demo: class try of 5.2 && 5.3
