@@ -21,3 +21,5 @@
 ## struct_trying: class try of 5.1
 
 ## struct_demo: class try of 5.2 && 5.3
+i
+## enum_try: class try of 6.1 && 6.2 
