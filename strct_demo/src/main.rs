@@ -6,12 +6,21 @@ struct Rectangle {
 }impl Rectangle {
     fn rectangle(width: u32, height: u32) -> Rectangle {
         Rectangle { width, height }
-    }
+    } // Constructor Function
 
     fn area(&self) -> u32 {
         self.width * self.height
     }
-}
+
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+
+    fn square(size: u32) -> Rectangle {
+        Rectangle { width: size, height: size }
+    } // Correlation Function
+} // more than one impl block for a struct is allowed
+
 fn main() {
     let width1 = 20;
     let height1 = 30;
