@@ -3,8 +3,7 @@
 struct Rectangle {
     width: u32,
     height: u32,
-}
-impl Rectangle {
+}impl Rectangle {
     fn rectangle(width: u32, height: u32) -> Rectangle {
         Rectangle { width, height }
     }
@@ -20,7 +19,6 @@ fn main() {
         "The area of the rectangle is {} square pixels.",
         area(width1, height1)
     );
-
     let dim = (20, 30);
     println!(
         "The area of the rectangle is {} square pixels.",
