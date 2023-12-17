@@ -70,4 +70,11 @@ mod back_of_house3 {
         Soup,
         Salad,
     }
+     // enum is public
+     // the varies in enum is public
 }
+pub fn eat_at_restaurant3() {
+    let order1 = back_of_house3::Appetizer::Soup;
+    let order2 = back_of_house3::Appetizer::Salad;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
