@@ -5,10 +5,12 @@ mod front_of_house {
     }
 }
 
-use crate::front_of_house::hosting;
+ // use crate::front_of_house::hosting; // this path is private
  // use self::front_of_house::hosting;
  // use front_of_house::hosting;
-
+pub use crate::front_of_house::hosting; // this path is public.
+ // pub use self::front_of_house::hosting;
+ // pub use front_of_house::hosting;
 pub fn eat_at_restaurant() {
     hosting::add_to_waitlist();
      // error: hosting::some_function();
