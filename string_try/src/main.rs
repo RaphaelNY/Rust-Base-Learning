@@ -1,3 +1,5 @@
+use std::ffi::CString;
+
 fn main() {
      // in rust, string used UTF-8 encoding
      // in the core,only one string 'cut' type: str (or &str). saved by 0&1
@@ -23,7 +25,8 @@ fn main() {
     let s6: String = String::from("Hello, ");
     let s7: String = String::from("world!");
     let s8: String = s6 + &s7;
-    println!("s8 is {}", s8);
+    let s8: String = s8 + &s7;
+    println!("s8 is {}, s7 is {}", s8, s7);
      /* '+'
         like this:
         fn add(self, s: &str) -> String {
@@ -32,4 +35,42 @@ fn main() {
         }
      */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     // format! macro
+    let s1: String = String::from("tic");
+    let s2: String = String::from("tac");
+    let s3: String = String::from("toe");
+
+     // let s3: String = s1 + "-" + &s2 + "-" + &s3;
+     // println!("s3 is {}", s3);
+
+    let s4: String = format!("{}-{}-{}", s1, s2, s3);
+    println!("s4 is {}", s4);
+     // let s3: String = format!("{}-{}-{}", s1, s2, s3);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     // index string
+    let s1: String = String::from("hello");
+    let s2: String = String::from("你好");
+    let s3: String = String::from("👋🏻");
+    let len1: usize = s1.len();
+    let len2: usize = s2.len();
+    let len3: usize = s3.len();
+    println!("{} len is {}\n{} len is {}\n{} len is {}", s1, len1, s2, len2, s3, len3);
+     // unicode scalar value
+     // let h: char = s1[0]; // error
+     // println!("h is {}", h);
+    let answer = &s2[0..3]; // get a cut of string s2
+    println!("answer is {}", answer);
+
+    let h: char = s1.chars().nth(0).unwrap();
+    println!("h is {}", h);
+
+    let h: char = s2.chars().nth(0).unwrap();
+    println!("h is {}", h);
+
+    for b in s2.bytes() {
+        println!("{}", b);
+    }
+    for b in s2.chars() { // unicode scalar value
+        println!("{}", b);
+    }
 }
