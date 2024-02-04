@@ -1,6 +1,7 @@
 use trait_trying::{Summary, Tweet};
 use trait_trying::NewsArticle;
 
+
 /// # Trait
 /// - A trait tells the Rust compiler about functionality a particular type has and can share with other types.
 /// - We can use traits to define shared behavior in an abstract way.
@@ -31,3 +32,22 @@ fn main() {
 
     println!("1 new tweet: {}", tweet.summarize());
 }
+
+ // use trait bounds to fix
+fn largest<T: PartialOrd + Clone>(list: &[T]) -> T {
+     let mut largest = list[0].clone();
+     for item in list.iter() {
+         if item > &largest { // error: the trait `PartialOrd` is not implemented for `T`, '>'this trait is achieved in std::cmp::PartialOrd
+             largest = item.clone();
+         }
+     }
+ } // for type that didnot achieve Copy trait.
+fn largest1<T: PartialOrd + Copy>(list: &[T]) -> T {
+     let mut largest = list[0];
+     for &item in list.iter() {
+         if item > largest {
+             largest = item;
+         }
+     }
+     largest
+ } // for type that achieved Copy trait.
