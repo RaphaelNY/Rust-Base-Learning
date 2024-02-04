@@ -22,10 +22,34 @@
  /// - second, if there is exactly one input lifetime parameter, that lifetime is assigned to all output lifetime parameters.
  /// - third, if there are multiple input lifetime parameters, but one of them is "&self" or "&mut self", the lifetime of self
  ///                                                                         is assigned to all output lifetime parameters.
+ /// ## 'static
+ /// this is a special lifetime, it means the reference can live for the entire duration of the program.
+ /// let s: &'static str = "start"; is equal to let s: &str = "start";
 
- struct ImportantExcerpt<'a> {
-     part: &'a str,
- }
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}impl <'a> ImportantExcerpt<'a> {
+    fn level(&self) -> i32 {
+        3
+    }
+
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+
+fn longest_with_an_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
+    where
+        T: std::fmt::Display
+{
+    println!("Announcement! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
 
 fn main() {
     {
