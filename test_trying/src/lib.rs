@@ -21,6 +21,11 @@
 /// - from std.
 /// - as same as == and !=.
 /// - assert to false will panic and print the message.
+/// # 11.3 add custom message
+/// - assert!: assert!(condition, message)
+/// - assert_eq!: assert_eq!(left, right, message)
+/// - assert_ne!: assert_ne!(left, right, message)
+/// - message will give to format! to format the message, can use {}
 
 #[derive(Debug)]
 pub struct Rectangle {
