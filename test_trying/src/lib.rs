@@ -17,6 +17,10 @@
 /// ## use assert to check the result
 /// - ture is access.
 /// - false is panic.
+/// ## use assert_eq! || assert_ne!
+/// - from std.
+/// - as same as == and !=.
+/// - assert to false will panic and print the message.
 
 #[derive(Debug)]
 pub struct Rectangle {
@@ -27,6 +31,9 @@ pub struct Rectangle {
 impl Rectangle {
     pub fn can_hold(&self, other: &Rectangle) -> bool {
         self.width > other.width && self.height > other.height
+    }
+    pub fn smaller(&self, other: &Rectangle) -> bool {
+        self.width < other.width && self.height < other.height
     }
 
 }
@@ -42,7 +49,27 @@ mod tests {
     #[test]
     fn it_works() {
         let result = add(2, 2);
-        assert_eq!(result, 4);
+        assert_eq!(result, 4, "2 + 2 != 4");
+    }
+
+    #[test]
+    fn assert_to_ne() {
+        let result = add(2, 2);
+        assert_ne!(result, 5, "2 + 2 == 5");
+    }
+
+    #[test]
+    fn larger_can_hold_smaller() {
+        let larger = Rectangle { width: 8, height: 7 };
+        let smaller = Rectangle { width: 5, height: 1 };
+        assert!(larger.can_hold(&smaller));
+    }
+
+    #[test]
+    fn smaller_can_hold_larger() {
+        let larger = Rectangle { width: 8, height: 7 };
+        let smaller = Rectangle { width: 5, height: 1 };
+        assert!(!smaller.can_hold(&larger));
     }
 
     #[test]
