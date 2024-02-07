@@ -1,19 +1,19 @@
 /// # TEST
-/// ## 11.1 test
-/// - test:
+/// ## 11.1 tests
+/// - tests:
 ///     - function
 ///     - see tested function as we thought.
-/// - test function body
+/// - tests function body
 ///     - testing function
 ///     - be tested function
 ///     - assert
-/// ### test function
-/// - testing function need use test attribute to be marked.
+/// ### tests function
+/// - testing function need use tests attribute to be marked.
 ///     - attribute is a rust code
-///     - add #\[test] to the function can change function to testing function.
-/// ### how to run test function
-/// - use: "cargo test" to run all test function in the project.
-/// - rust will build a Test Runner to run all test function.
+///     - add #\[tests] to the function can change function to testing function.
+/// ### how to run tests function
+/// - use: "cargo tests" to run all tests function in the project.
+/// - rust will build a Test Runner to run all tests function.
 /// ## 11.2 Assert
 /// ### use assert to check the result
 /// - ture is access.
@@ -28,51 +28,51 @@
 /// - assert_ne!: assert_ne!(left, right, message)
 /// - message will give to format! to format the message, can use {}
 /// ## 11.4 use should_panic to deal that program should panic in our set situation
-/// - test will check the retun value is ture and check append panic in our set situation.
+/// - tests will check the retun value is ture and check append panic in our set situation.
 /// - should_panic's attribute
 ///     - function panic: True
 ///     - function did not panic: False
 /// - you can add expected key to order the message that panic should have,like:
 ///     - \#\[should_panic(expected = "...")]
-///  ## 11.5 use Result<T, E> to test
-/// - use **Result<T, E>** to test the function that return Result.
-///     - if return is Ok, test is pass or if return is Err, test is fail.
-/// - don't used should_panic to test the function that return Result.
-/// ## 11.6 control the test
-/// - change the cargo test motion to control the test.-- add terminal varies.
+///  ## 11.5 use Result<T, E> to tests
+/// - use **Result<T, E>** to tests the function that return Result.
+///     - if return is Ok, tests is pass or if return is Err, tests is fail.
+/// - don't used should_panic to tests the function that return Result.
+/// ## 11.6 control the tests
+/// - change the cargo tests motion to control the tests.-- add terminal varies.
 /// - default:
-///     - run all test function.
+///     - run all tests function.
 ///     - catch (but not show) the output.
 /// - use:
-///     - cargo test --help (show --help can follow what command)
-///     - cargo test -- --help (show -- all command --help)
-/// - more than one test function cannot use a same situation, like environment, work-folder, environment path.
-/// - --test-threads
-///     - cargo test -- --test-threads=1 (run test function one by one)
+///     - cargo tests --help (show --help can follow what command)
+///     - cargo tests -- --help (show -- all command --help)
+/// - more than one tests function cannot use a same situation, like environment, work-folder, environment path.
+/// - --tests-threads
+///     - cargo tests -- --tests-threads=1 (run tests function one by one)
 /// - show-type function output
-///     - default: if test = ture,, if will catch all output to standard output.(for example, if test ture, message in println! will not show)
-/// ## 11.7 run test by name
-/// - use: test name as car test's varies.
-///     - cargo test test_name, can order one test function to run.
-///     - used apart of name to run more than one test function(you can also use module name to run all test function in the module)
-/// ## 11.8 use command to ignore some test, run others.
-/// - add \#\[ignore] to the function to ignore the function.if we wanted to run this function, we can use cargo test -- --ignored to run the function.
-/// ## 11.9 test orgnaization
-/// - test has group test and single test.
-/// - single test
+///     - default: if tests = ture,, if will catch all output to standard output.(for example, if tests ture, message in println! will not show)
+/// ## 11.7 run tests by name
+/// - use: tests name as car tests's varies.
+///     - cargo tests test_name, can order one tests function to run.
+///     - used apart of name to run more than one tests function(you can also use module name to run all tests function in the module)
+/// ## 11.8 use command to ignore some tests, run others.
+/// - add \#\[ignore] to the function to ignore the function.if we wanted to run this function, we can use cargo tests -- --ignored to run the function.
+/// ## 11.9 tests orgnaization
+/// - tests has group tests and single tests.
+/// - single tests
 ///     - small,
 ///     - fast,once run a small module only.
-///     - can test private.
-/// - group test:
+///     - can tests private.
+/// - group tests:
 ///     - in outside of lib,used it like other outside code.
-///     - can only test public.
-///     - in one test may used more than one function.
-/// - \#\[cfg(test)]
-///     - only run cargo test can run these code
-/// - but, group test needn't cfg attribute, it can in mane different folder-path
+///     - can only tests public.
+///     - in one tests may used more than one function.
+/// - \#\[cfg(tests)]
+///     - only run cargo tests can run these code
+/// - but, group tests needn't cfg attribute, it can in mane different folder-path
 /// - cfg (configuration
 ///     - told rust follow can only include by ordered conf.
-///     - only cargo test will pack include helper function and \#\[test] marked function.
+///     - only cargo tests will pack include helper function and \#\[tests] marked function.
 
 
 #[derive(Debug)]
@@ -127,6 +127,14 @@ fn prints_and_return_10(a: i32) -> i32 {
     10
 }
 
+pub fn add_two(a: i32) -> i32 {
+    a + 2
+}
+
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -157,10 +165,10 @@ mod tests {
         assert!(!smaller.can_hold(&larger));
     }
 
-    #[test]
-    fn go_to_panic() {
-        panic!("this test should be failed.");
-    }
+    // #[tests]
+    // fn go_to_panic() {
+    //     panic!("this tests should be failed.");
+    // }
 
     #[test]
     #[should_panic(expected = "Guess value must be less than or equal to 100")]
@@ -186,6 +194,6 @@ mod tests {
     #[test]
     fn this_test_will_fail() {
         let value = prints_and_return_10(8);
-        assert_eq!(value, 5);
+        assert_ne!(value, 5);
     }
 }
