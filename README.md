@@ -21,9 +21,11 @@
 ## struct_trying: class try of 5.1
 
 ## struct_demo: class try of 5.2 && 5.3
-i
+
 ## enum_try: class try of 6.1 && 6.2 
 
 ## match——trying： class try of 6.3 && 6.4
 
 ## string——try： class try of 8.1 && 8.2 && 8.3
+
+## 13.0 closure_try: class try of 13.0 to 13.4
