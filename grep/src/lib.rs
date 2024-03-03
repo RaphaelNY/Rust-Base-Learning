@@ -12,7 +12,7 @@ impl<'a> Config<'a> {
         if args.len() < 3 {
             return Err("not enough arguments");
         }
-        Ok(Config { query: &args[1], filename: &args[2], case_insensitive: env::var("CASE_INSENSITIVE").is_err()})
+        Ok(Config { query: &args[1], filename: &args[2], case_insensitive: env::var("CASE_INSENSITIVE").is_err() })
     }
 }
 
@@ -24,6 +24,8 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     } else {
         search_case_insensitive(&config.query, &contents)
     };
+
+    if results.len() == 0 { println!("No result found"); }
 
     for line in results {
         println!("{}", line);
