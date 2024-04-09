@@ -4,6 +4,7 @@ fn main() {
 
 fn count_by(x: u32, n: u32) -> Vec<u32> {
     vec![x; n as usize].iter().enumerate().map(|(i, _)| (i + 1) as u32 * x).collect::<Vec<u32>>()
+    // (1..=n).map(|e| x*e).collect() // Alternative solution
 }
 
 #[cfg(test)]
