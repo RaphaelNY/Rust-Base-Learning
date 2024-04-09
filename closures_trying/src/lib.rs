@@ -34,6 +34,15 @@ where
     }
 }
 
+struct Shoe {
+    size: i32,
+    style: String,
+}
+
+fn shoes_in_my_size(shoes: Vec<Shoe>, shoe_size: i32) -> Vec<Shoe>{
+    shoes.into_iter().filter(|x| x.size == shoe_size).collect()
+}
+
 pub fn generate_workout(intensity: u32, random_number: u32) {
 
     let expensive_closure = |num| {

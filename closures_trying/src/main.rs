@@ -42,7 +42,9 @@ use closures_trying::*;
 ///     when iterator next out a item, it will move the iterator to the next position.
 /// ## 13.6 used iterator
 /// - map: receive a closure, return a new iterator, the new iterator will cover the value that the closure return.
-///
+/// ## 13.7 filter
+/// filter accept a closure. when closure go through the itraor, return a bool.
+/// if closure return True, the value will be kept(kept in the iterator created from filter), otherwise, it will be dropped.
 fn main() {
     let simulated_user_specified_value = 10;
     let simulated_random_number = 7;
