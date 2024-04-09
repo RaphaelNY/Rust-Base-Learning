@@ -24,6 +24,12 @@ fn repeat_str(src: &str, count: usize) -> String {
     // src.repeat(count) // Alternative solution
 }
 
+fn solution(phrase: &str) -> String {
+    phrase.chars().rev().collect()
+}
+fn solution2(word: &str, ending: &str) -> bool {
+    word.ends_with(ending)
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -39,9 +45,20 @@ mod tests {
         assert_eq!(make_upper_case("hello"), "HELLO");
     }
 
+    #[test]
     fn example_tests() {
         assert_eq!(repeat_str("a", 4), "aaaa");
         assert_eq!(repeat_str("hello ", 3), "hello hello hello ");
         assert_eq!(repeat_str("abc", 2), "abcabc");
+    }
+
+    #[test]
+    fn sample_test() {
+        assert_eq!(solution("world"), "dlrow");
+    }
+
+    fn returns_expected2() {
+        assert_eq!(true, solution2("abc", "c"));
+        assert_eq!(false, solution2("strawberry", "banana"));
     }
 }
