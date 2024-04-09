@@ -15,6 +15,15 @@ fn make_upper_case(s: &str) -> String {
     // static make_upper_case: fn(&str) -> String = str::to_uppercase;
 }
 
+fn repeat_str(src: &str, count: usize) -> String {
+    let mut sr = String::new();
+    for _ in 0..count {
+        sr.push_str(src);
+    }
+    sr
+    // src.repeat(count) // Alternative solution
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -28,5 +37,11 @@ mod tests {
     #[test]
     fn test_make_upper_case() {
         assert_eq!(make_upper_case("hello"), "HELLO");
+    }
+
+    fn example_tests() {
+        assert_eq!(repeat_str("a", 4), "aaaa");
+        assert_eq!(repeat_str("hello ", 3), "hello hello hello ");
+        assert_eq!(repeat_str("abc", 2), "abcabc");
     }
 }
