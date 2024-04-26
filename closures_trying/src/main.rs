@@ -45,6 +45,8 @@ use closures_trying::*;
 /// ## 13.7 filter
 /// filter accept a closure. when closure go through the itraor, return a bool.
 /// if closure return True, the value will be kept(kept in the iterator created from filter), otherwise, it will be dropped.
+/// ## 13.8 iterator trait create a new own-design iterator
+/// to did it, you just achieve the Iterator trait, and a next method.
 fn main() {
     let simulated_user_specified_value = 10;
     let simulated_random_number = 7;
@@ -77,5 +79,6 @@ fn main() {
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      // iterator trait && next method
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
