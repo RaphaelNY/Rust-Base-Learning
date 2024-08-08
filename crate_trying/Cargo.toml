@@ -1,0 +1,21 @@
+# to pull this crate, you need add some dependencies in Cargo.toml [package]
+# crate need name whitch is unique in the https://ctates.io
+# a crate can have 'description', whitch will append in crate searching result.
+# a crate can have 'license',you can search in https://spdx.org/licenses/ .You can add more than one license,
+#     use 'OR'to split them.
+# a crate can have 'version'
+# a crate can have 'authors'
+# use cargo publish to publish your crate in https://crates.io
+# name, version, authors, edition, description,license must be required.
+
+[package]
+name = "art"
+version = "0.1.0"
+authors = ["RaphaelNY"]
+edition = "2021"
+description = ""
+license = "MIT OR Apache-2.0"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+

@@ -1,0 +1,28 @@
+// # 14.2 create  html doc
+// - cargo doc --open
+// Examples, Panics, Errors, Safety and Tests
+// - cargo test
+// example code in the doc will be tested
+// - describe the function in the doc
+// it always describes crate func
+//      - crate root
+//      - module
+
+//! # crate_trying Crate
+//!
+//! `crate_trying` is a collection of utilities to make performing certain calculations more convenient.
+//! calculate the area of a rectangle, add one to a number, and more.
+
+/// Adds one to the number given.
+///
+/// # Examples
+///
+/// ```
+/// let arg = 5;
+/// let answer = crate_trying::add_one(arg);
+///
+/// assert_eq!(6, answer);
+/// ```
+pub fn add_one(x: i32) -> i32 {
+    x + 1
+}
