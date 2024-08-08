@@ -1,0 +1,8 @@
+[package]
+name = "adder"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+adder_tests = { path = "../adder_tests" }
+adder_bench = { path = "../adder_bench" }
