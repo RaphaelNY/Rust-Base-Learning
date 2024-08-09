@@ -79,10 +79,27 @@ there are no other owners, data will be dropped.
 - how can rust knows enum's size?
   - it will go through all the variants of the enum, and find the largest one.
 
-### Deref Trait
+### 15.2 Deref Trait(1)
 
 - if Deref trait is implemented, we can use `*` to dereference the value.
 - by implementing Deref trait, we can use the value as a reference.
 - `*` is a syntactic sugar for `*(value.deref())`
 
 `Box<T>` be let as a tuple struct with elements of type `T`.
+
+#### Deref Coercion
+
+- Deref Coercion is a feature that allows you to treat any type that implements Deref as a reference to the inner type.
+- if `T` implement Deref Trait:
+  - Deref Coercion will convert `&T` to `&U` if `T` implements Deref to `U`
+- when some type reference send to func or method but its type and definition are different to needed:
+  - Deref Coercion will automatically work.
+  - IDE will do aseries of call to deref to change it to the type we needed.
+
+#### deref and mutable
+
+- `DerefMut` trait is used to dereference mutable references.
+- when type and trait in these three situations, rust will operate deref coercion:
+  - From `&T` to `&U` when `T: Deref<Target=U>`
+  - From `&mut T` to `&mut U` when `T: DerefMut<Target=U>`
+  - From `&mut T` to `&U` when `T: Deref<Target=U>`
