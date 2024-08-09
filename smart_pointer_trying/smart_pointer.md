@@ -103,3 +103,42 @@ there are no other owners, data will be dropped.
   - From `&T` to `&U` when `T: Deref<Target=U>`
   - From `&mut T` to `&mut U` when `T: DerefMut<Target=U>`
   - From `&mut T` to `&U` when `T: Deref<Target=U>`
+
+### 15.3 Drop Trait
+
+- Drop trait is used to customize the code run when an instance of the smart pointer goes out of scope.
+  - such as file, network connection, etc.
+  - any type can implement Drop trait.
+- Drop trait only ordered to implement drop method.
+  - `fn drop(&mut self)` it ordered mutable reference to self.
+- Drop trait is in the prelude, so we don't need to import it.
+- we can use `std::mem::drop` to drop the value manually.
+  - rust baned to call `.drop()` method manually, so we can use `std::mem::drop` to drop the value manually.
+
+### 15.4 Rc<T>, the Reference Counted Smart Pointer
+
+- `Rc<T>` is a reference counting smart pointer.
+- sometimes, one value can be shared by more than one owner.
+- `Rc<T>` can count the number of owners and find out all the owners.
+
+#### using situations of `Rc<T>`
+
+- when need to use data in heap and it was only read by more part of the program but cannot be sure which one is the las
+to use it.
+- `Rc<T>` can only used in single-threaded situations.
+- `Rc<T>` need to import `std::rc::Rc` to use it.
+- `Rc::clone(&a)`: to increase the number of owners.
+- `Rc::strong_count(&a)`: to get the number of owners.
+  - `Rc::weak_count(&a)`: to get the number of weak owners.
+
+#### example of `Rc<T>`
+
+- two list share another list's ownership:
+  - b->b1->a1->a2->nil
+  - a->a1->a2->nil
+  - c->c1->a1->a2->nil
+
+- `Rc::clone` will increase the number of owners. but it won't operate deep copy of data.
+- `.clone()` is a shallow copy, it just copies the pointer to the data.
+
+- `Rc<T>` worked by immutable borrowing the data.you can share the data to many part in program which read-only.
