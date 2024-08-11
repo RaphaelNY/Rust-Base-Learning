@@ -142,3 +142,63 @@ to use it.
 - `.clone()` is a shallow copy, it just copies the pointer to the data.
 
 - `Rc<T>` worked by immutable borrowing the data.you can share the data to many part in program which read-only.
+
+### 15.5 RefCell and the Interior Mutability Pattern
+
+#### interior mutability
+
+- `RefCell<T>` it allowed to keep immutable reference and can change the data.
+  - datasturcture used unsafe code to cross the borrow rule and changeable of rust.
+
+#### RefCell<T>
+
+- `RefCell<T>` can only used in single-threaded situations.
+- different of `Rc<T>`, `RefCell<T>` is the only one owner of the data.
+  - borrow rule:
+    - in any time, you can only have one mutable reference, or many of the immutable reference.
+    - reference is always available.
+- `RefCell<T>` & `Box<T>`
+  - `Box<T>` checked when compile time or it will be error
+  - `RefCell<T>` checked when runtime or it will be panic
+- use `RefCell<T>` to record borrow message when it is borrowed in runtime.
+  - two methods: `borrow` and `borrow_mut`
+    - `borrow` will return `Ref<T>` type, it implements `Deref` trait.
+    - `borrow_mut` will return `RefMut<T>` type, it implements `Deref` trait.
+  - `RefCell<T>` will record how many active `Ref<T>` and `RefMut<T>`.
+  - `RefCell<T>` will panic when it is borrowed by `RefMut<T>` and `Ref<T>` at the same time.
+    - `.borrow()` plus one of immutable reference
+    - any of `Ref<T>` leave the scope, the number of `Ref<T>` will decrease.
+    - `.borrow_mut()` plus one of mutable reference
+    - any of `RefMut<T>` leave the scope, the number of `RefMut<T>` will decrease.
+    - immutable ref number is no limit.
+    - mutable ref number is zero to one.
+
+#### others
+
+- `Cell<T>`: work by copy to visit data.
+- `Mutex<T>`: workes in multi-threaded situations
+
+### 15.6 Reference Cycles Can Leak Memory
+
+- `Rc<T>` and `RefCell<T>` can create reference cycles.
+- if reference cycles, the data will never be dropped.
+
+#### how to solve reference cycles
+
+- use `Weak<T>` to break the reference cycles.
+- `Rc::clone` rises the strong_count for `Rc<T>`, `Rc<T>` will be dropped when strong_count is zero.
+- `Rc<T>` create Weak Reference by `Rc::downgrade(&a)`.
+- `Weak<T>` can be used to create `Rc<T>` by `Weak::upgrade(&a)`.
+  - it returns `Weak<T>`
+  - Rc::downgrade will plus one of weak_count.
+- `Rc<T>` use weak_count to check how many weak reference to it.
+- `Rc<T>` will be dropped whether weak_count is zero when `Rc<T>` need to be dropped.
+
+#### Strong & Weak
+
+- *strong reference* is about shared ownership of `Rc<T>`
+- use *weak reference* will not increase the number of owners.
+- `Weak<T>` is used to break the reference cycles.
+  - when *Strong reference* is zero, the data will be dropped and the *Weak reference* will be dropped too.
+- before used `Weak<T>`, make sure the data is still available.
+  - call upgrade method in `Weak<T>` returns `Option<Rc<T>>`.

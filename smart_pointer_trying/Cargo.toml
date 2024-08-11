@@ -1,6 +1,10 @@
 [workspace]
 
 members = [
-    "example1_151", "example1_152", "example1_153", "example1_154",
-    "example2_151"
-, "example2_152"]
+    "example1_151",
+    "example1_152",
+    "example1_153",
+    "example1_154", "example1_155", "example1_156",
+    "example2_151",
+    "example2_152"
+, "example2_155", "example2_156"]
