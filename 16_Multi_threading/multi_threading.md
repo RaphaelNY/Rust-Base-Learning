@@ -82,7 +82,6 @@
     - if receive Message, return `Ok()`, with the Message
     - if no Message, return `Err`
   - you can use `loop` to check the `try_recv` 's result.
-
 ### Channel and ownership transfer
 
 - ***example 4***
@@ -94,3 +93,78 @@
 ### create more than one Receiver by clone
 
 - ***example 6***
+
+## 16.3
+
+### Using sharing to achieve concurrency
+
+- `Channel` likes single-ownership, once ownership gives ot Channel, it will be dropped.
+- Shared memory concurrency is similar to multi ownership: multiple threads can access the same block of memory simultaneously
+
+### Mutex
+> use Mutex to protect shared data,it allowed only one thread to access the data at the same time.
+
+- `Mutex`: mutual exclusion
+- in one time, only one thread can access the data
+- if you wan to access the data: 
+  - thread must have mutex(lock)
+    - lock datastructures is one part of mutex. it can follow who has the own visit power.
+
+#### two rules of Mutex
+
+- before get data, you must try to get lock.
+- after using mutex locked data, you must release lock that other thread can access the data.
+
+#### Mutex<T> 's API
+
+- `Mutex::new()`: create a new `Mutex<T>`
+  - `Mutex<T>` is a smart pointer
+- before access data, used `lock()` to get lock.
+  - it will block the current thread until get lock
+  - lock may fail, return `Result<T,E>`(`Err`)
+  - `lock()` return a `MutexGuard` (smart pointer, implement `Deref` && `Drop`)
+- ***example 7***
+
+#### Multiple threads share `Mutex<T>` && Multi threaded multiple ownership
+
+- ***example 8***
+
+#### Using Arc<T>for atomic reference counting
+
+- `Arc<T>` used in multiple threads, `Rc<T>` used in single thread
+  - A: atomic
+  - `Arc<T>` need more cost than `Rc<T>`, because it need to ensure atomicity
+- `Arc<T>` 's API is the same to `Rc<T>`
+- ***example 8***
+
+### `RefCell<T>` and `Rc<T>` vs `Mutex<T>` and `Arc<T>`
+
+- `Mutex<T>` support mutable inside just like Cell.
+- we used `RefCell<T>` to change the value in `Rc<T>`
+- we used `Mutex<T>` to change the value in `Arc<T>`
+- warning: `Mutex<T>` have dead lock risk.
+
+## 16.4
+
+### Send && Sync Trait
+
+> `std::marker::Sync` and `std::marker::Send` are two special traits in Rust, they are used to ensure that the data can be safely shared between threads.
+
+### Send: allow ownership transfer between threads
+
+- implement `Send` can transfer ownership between threads
+- almost all Rust types implement `Send`
+  - `Rc<T>` and `RefCell<T>` have not `Send` Trait, they only allowed in single thread
+- Any type consisting entirely of the `Send` type is also marked as `Send`
+- Except for the original pointer, almost all basic types are `Send`
+
+### Sync: allow shared references between threads
+
+- type implement `Sync` can safely share references between threads
+  - just like: if `T` is `Sync`, that `&T` is `Send`
+- all basic types are `Sync`
+- consisting entirely of the `Sync` type is also marked as `Sync`
+  - but `Rc<T>` is not `Sync`
+  - `RefCell<T>` and `Cell<T>` family are not `Sync`
+  - `Mutex<T>` and `Arc<T>` are `Sync`
+  - Manually implementing `Send` and `Sync` is not secure, you must design your own code to ensure their security
