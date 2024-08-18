@@ -1,0 +1,3 @@
+[workspace]
+
+members = ["example1_171", "example2_172", "example3_172", "example4_173", "example5_173"]
