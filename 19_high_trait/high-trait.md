@@ -107,3 +107,46 @@
 - compiler cannot guarantee the safety of the code, so you need to ensure that the code is safe.
 - when you have sufficient reasons, you can use unsafe code.
 - marked by `unsafe` keyword, you can find it easily.
+
+## 19.2 high-level Trait
+
+### Using association types to specify placeholder types in trait definitions
+
+- associated types is a placeholder type of trait, it can use trait method signs:
+  - Traits containing certain types can be defined without needing to know what these types are before implementation
+- ***example7***
+
+### Default generic parameters and operator overloading
+
+- You can specify a default concrete type for generics when using generic parameters
+- `<PlaceholderType=ConcreteType>`
+- This technique is commonly used for *operator overloading*
+- Rust does not allow the creation of its own operators and overloading of any operator
+- However, some corresponding operators can be overloaded by implementing the traits listed in std:: ops
+- ***example8***
+
+#### The main application scenarios of default generic parameters
+
+- Extend a type without breaking existing code 
+- Allow customization in specific scenarios that most users do not need
+
+#### how Fully Qualified Syntax call method which is in the same name with trait
+
+- ***example9***
+- full qualified syntax: `<Type as Trait>::function(receiver_if_method, next_arg, ...);`
+  - you can call the method in everywhere.
+  - allowed to ignore the part that can judge the type from up-and-down context.
+  - when Rust cannot judge witch implement you want to call, you need to use it.
+
+### using supertrait to order a trait with the other trait's function
+
+- we need to use other traits' func in this trait:
+  - need relied on trait to be implemented first.
+  - the relied on trait is a supertrait of the current trait.
+- ***example10***
+ 
+### use `newtype` mode to implement outer trait in outer type.
+- rule: when trait or type defined in local package, it can implement this trait for this type.
+- can use newtype mode to cross the rule.
+  - use `tuple struct` to create a new type.
+  - ***example11***

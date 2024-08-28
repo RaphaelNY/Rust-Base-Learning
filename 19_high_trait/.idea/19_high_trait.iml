@@ -8,6 +8,11 @@
       <sourceFolder url="file://$MODULE_DIR$/example4_191/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/example5_191/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/example6_191/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/example7/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/example8/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/example10/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/example11/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/example9/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

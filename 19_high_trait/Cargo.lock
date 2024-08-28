@@ -3,6 +3,14 @@
 version = 3
 
 [[package]]
+name = "example10"
+version = "0.1.0"
+
+[[package]]
+name = "example11"
+version = "0.1.0"
+
+[[package]]
 name = "example1_191"
 version = "0.1.0"
 
@@ -24,4 +32,16 @@ version = "0.1.0"
 
 [[package]]
 name = "example6_191"
+version = "0.1.0"
+
+[[package]]
+name = "example7"
+version = "0.1.0"
+
+[[package]]
+name = "example8"
+version = "0.1.0"
+
+[[package]]
+name = "example9"
 version = "0.1.0"
