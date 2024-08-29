@@ -35,7 +35,7 @@
   - mutable raw pointer: `*mut T`
   - immutable raw pointer: `*const T`, means when Pointer be dereferenced, the value can't be changed directly.
   - attention: this `*` is different from dereference, it is a part of type.
-- difference between raw pointer and reference:
+- difference between a raw pointer and reference:
   - allowed to keep the mutable and immutable pointer or many pointers to the same memory location's mutable pointer to ignore borrow rules.
   - cannot confirm that it will pointer to a valid memory location.
   - allowed to be `null` or invalid memory address.
@@ -90,7 +90,7 @@
 #### difference between static variable and constant
 
 - constant: `const NAME: TYPE = VALUE;`
-- constant: can be used in the same way as static variables, but the value of constant is fixed at compile time.
+- constant can be used in the same way as static variables, but the value of constant is fixed at compile time.
 - constant allowed copy.
 - static variable can be mutable, but visit and change it is *unsafe*. 
 - ***example5***
@@ -130,7 +130,7 @@
 - Extend a type without breaking existing code 
 - Allow customization in specific scenarios that most users do not need
 
-#### how Fully Qualified Syntax call method which is in the same name with trait
+#### how Fully Qualified Syntax call method, which is in the same name with trait
 
 - ***example9***
 - full qualified syntax: `<Type as Trait>::function(receiver_if_method, next_arg, ...);`
@@ -147,6 +147,18 @@
  
 ### use `newtype` mode to implement outer trait in outer type.
 - rule: when trait or type defined in local package, it can implement this trait for this type.
-- can use newtype mode to cross the rule.
+- you can use new type mode to cross the rule.
   - use `tuple struct` to create a new type.
   - ***example11***
+
+## 19.5
+
+### macro
+ 
+- macro: a way to write code that writes other code. 
+  - use `macro_rules!` to define a *declarative macro*.
+  - three types of macro: declarative macro, procedural macro, and attribute macro.
+    - `#[derive]` is a procedural macro. used for struct or enum,
+    - like, can add any _ in any place.
+    - like func, seems like function call, operate his token.
+- metaprogramming: write code that writes other code.

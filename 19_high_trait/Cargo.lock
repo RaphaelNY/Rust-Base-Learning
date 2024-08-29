@@ -11,6 +11,10 @@ name = "example11"
 version = "0.1.0"
 
 [[package]]
+name = "example12"
+version = "0.1.0"
+
+[[package]]
 name = "example1_191"
 version = "0.1.0"
 

@@ -12,6 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/example8/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/example10/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/example11/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/example12/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/example9/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
